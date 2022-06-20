@@ -19,7 +19,8 @@ SECRET_TOKEN = os.getenv('KITTY_BOT_TOKEN')
 URL = 'https://api.thecatapi.com/v1/images/search'
 BUTTON = 'Получить котика'
 
-def start(update, context):
+def start(update, context) -> None:
+    "Process /start command and return text and button"
     chat = update.effective_chat
     
     logging.info(f'Somebody has used /start command. Username: {chat.username}')
@@ -40,7 +41,7 @@ def start(update, context):
      reply_markup=reply_markup, parse_mode='Markdown')
 
 
-def buttonHandler(update, context):
+def buttonHandler(update, context) -> None:
     chat = update.effective_chat
     if button in update.message.text:
         link = get_kitty_pic()
@@ -48,7 +49,7 @@ def buttonHandler(update, context):
     else:
        context.bot.send_message(chat_id=chat.id, text='Я умею только котиков отправлять')
 
-def get_kitty_pic():
+def get_kitty_pic() -> str:
     try:
         r = requests.get(url=URL)
     except Exception as e:
