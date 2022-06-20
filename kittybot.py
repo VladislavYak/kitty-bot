@@ -42,6 +42,7 @@ def start(update, context) -> None:
 
 
 def buttonHandler(update, context) -> None:
+    "Desctibe button to get kitty"
     chat = update.effective_chat
     if button in update.message.text:
         link = get_kitty_pic()
@@ -50,6 +51,7 @@ def buttonHandler(update, context) -> None:
        context.bot.send_message(chat_id=chat.id, text='Я умею только котиков отправлять')
 
 def get_kitty_pic() -> str:
+    "Use API to get kitty pic link"
     try:
         r = requests.get(url=URL)
     except Exception as e:
